@@ -3783,10 +3783,10 @@ private void recoverFocusFromState(){
 }
 private void resetFocusInfo(){
 }
-private int getScrollY(){
+public int getScrollY(){
 return 0;
 }
-private int getScrollX(){
+public int getScrollX(){
 return 0;
 }
 private void onScrollChanged(int scrollX,int scrollY,int i,int j){
@@ -3797,8 +3797,6 @@ final void fillRemainingScrollValues(State state){
 }
 boolean isAccessibilityEnabled(){
 return false;
-}
-public void post(Runnable runnable){
 }
 public long getDrawingTime(){
 return 0;
