@@ -7,6 +7,7 @@ import r.android.os.Parcelable;
 import r.android.os.SystemClock;
 import r.android.util.Log;
 import r.android.util.SparseArray;
+import r.android.view.MotionEvent;
 import r.android.view.View;
 import r.android.view.ViewGroup;
 import r.android.view.ViewParent;
