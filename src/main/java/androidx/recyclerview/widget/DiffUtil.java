@@ -16,7 +16,7 @@
 
 package androidx.recyclerview.widget;
 
-import androidx.annotation.IntRange;
+import r.android.annotation.IntRange;
 import r.android.annotation.NonNull;
 import r.android.annotation.Nullable;
 

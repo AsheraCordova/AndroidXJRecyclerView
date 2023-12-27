@@ -1,6 +1,6 @@
 package com.xwray.groupie;
 
-import androidx.annotation.CallSuper;
+import r.android.annotation.CallSuper;
 import androidx.annotation.LayoutRes;
 import r.android.annotation.NonNull;
 import r.android.annotation.Nullable;

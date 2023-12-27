@@ -1,6 +1,6 @@
 package com.xwray.groupie;
 
-import androidx.annotation.MainThread;
+import r.android.annotation.MainThread;
 import r.android.annotation.NonNull;
 import r.android.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;

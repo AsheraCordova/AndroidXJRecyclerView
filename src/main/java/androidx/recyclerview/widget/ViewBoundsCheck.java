@@ -18,7 +18,7 @@ package androidx.recyclerview.widget;
 
 import r.android.view.View;
 
-import androidx.annotation.IntDef;
+import r.android.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
