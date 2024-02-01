@@ -13,13 +13,17 @@ import r.android.view.ViewGroup;
 import r.android.view.ViewParent;
 import r.android.widget.LinearLayout;
 import androidx.core.os.TraceCompat;
+import androidx.core.view.NestedScrollingChild2;
+import androidx.core.view.NestedScrollingChild3;
+import androidx.core.view.NestedScrollingChildHelper;
+import androidx.core.view.ScrollingView;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator.ItemHolderInfo;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-public class RecyclerView extends ViewGroup {
+public class RecyclerView extends ViewGroup implements ScrollingView, NestedScrollingChild2, NestedScrollingChild3 {
   static final String TAG="RecyclerView";
   static final boolean DEBUG=false;
   static final boolean VERBOSE_TRACING=false;
@@ -3481,6 +3485,30 @@ return RecyclerView.NO_POSITION;
 }
 return mAdapterHelper.applyPendingUpdatesToPosition(viewHolder.mPosition);
 }
+public void setNestedScrollingEnabled(boolean enabled){
+getScrollingChildHelper().setNestedScrollingEnabled(enabled);
+}
+public boolean isNestedScrollingEnabled(){
+return getScrollingChildHelper().isNestedScrollingEnabled();
+}
+public boolean startNestedScroll(int axes){
+return getScrollingChildHelper().startNestedScroll(axes);
+}
+public boolean startNestedScroll(int axes,int type){
+return getScrollingChildHelper().startNestedScroll(axes,type);
+}
+public void stopNestedScroll(){
+getScrollingChildHelper().stopNestedScroll();
+}
+public void stopNestedScroll(int type){
+getScrollingChildHelper().stopNestedScroll(type);
+}
+public boolean hasNestedScrollingParent(){
+return getScrollingChildHelper().hasNestedScrollingParent();
+}
+public boolean hasNestedScrollingParent(int type){
+return getScrollingChildHelper().hasNestedScrollingParent(type);
+}
 public boolean dispatchNestedScroll(int dxConsumed,int dyConsumed,int dxUnconsumed,int dyUnconsumed,int[] offsetInWindow){
 return getScrollingChildHelper().dispatchNestedScroll(dxConsumed,dyConsumed,dxUnconsumed,dyUnconsumed,offsetInWindow);
 }
@@ -3489,6 +3517,18 @@ return getScrollingChildHelper().dispatchNestedScroll(dxConsumed,dyConsumed,dxUn
 }
 public final void dispatchNestedScroll(int dxConsumed,int dyConsumed,int dxUnconsumed,int dyUnconsumed,int[] offsetInWindow,int type,int[] consumed){
 getScrollingChildHelper().dispatchNestedScroll(dxConsumed,dyConsumed,dxUnconsumed,dyUnconsumed,offsetInWindow,type,consumed);
+}
+public boolean dispatchNestedPreScroll(int dx,int dy,int[] consumed,int[] offsetInWindow){
+return getScrollingChildHelper().dispatchNestedPreScroll(dx,dy,consumed,offsetInWindow);
+}
+public boolean dispatchNestedPreScroll(int dx,int dy,int[] consumed,int[] offsetInWindow,int type){
+return getScrollingChildHelper().dispatchNestedPreScroll(dx,dy,consumed,offsetInWindow,type);
+}
+public boolean dispatchNestedFling(float velocityX,float velocityY,boolean consumed){
+return getScrollingChildHelper().dispatchNestedFling(velocityX,velocityY,consumed);
+}
+public boolean dispatchNestedPreFling(float velocityX,float velocityY){
+return getScrollingChildHelper().dispatchNestedPreFling(velocityX,velocityY);
 }
 public static class LayoutParams extends r.android.view.ViewGroup.MarginLayoutParams {
 ViewHolder mViewHolder;
@@ -3759,6 +3799,18 @@ return mScrollingChildHelper;
 }
 SavedState mPendingSavedState;
 public static final int TYPE_TOUCH=0;
+public void startNestedScroll(){
+final boolean canScrollHorizontally=mLayout.canScrollHorizontally();
+final boolean canScrollVertically=mLayout.canScrollVertically();
+int nestedScrollAxis=ViewCompat.SCROLL_AXIS_NONE;
+if (canScrollHorizontally) {
+nestedScrollAxis|=ViewCompat.SCROLL_AXIS_HORIZONTAL;
+}
+if (canScrollVertically) {
+nestedScrollAxis|=ViewCompat.SCROLL_AXIS_VERTICAL;
+}
+startNestedScroll(nestedScrollAxis,TYPE_TOUCH);
+}
 public static class SavedState {
 Parcelable mLayoutState;
 }
@@ -3768,6 +3820,7 @@ mMaxFlingVelocity=0;
 mMinFlingVelocity=0;
 initAdapterManager();
 initChildrenHelper();
+setNestedScrollingEnabled(true);
 }
 void dispatchPendingImportantForAccessibilityChanges(){
 }
@@ -3804,6 +3857,21 @@ return 0;
 }
 public void stopScroll(){
 }
+public int dispatchNestedPreScroll(int dpos){
+mReusableIntPair[0]=0;
+mReusableIntPair[1]=0;
+final boolean canScrollHorizontally=mLayout.canScrollHorizontally();
+final boolean canScrollVertically=mLayout.canScrollVertically();
+if (dispatchNestedPreScroll(canScrollHorizontally ? dpos : 0,canScrollVertically ? dpos : 0,mReusableIntPair,mScrollOffset,TYPE_TOUCH)) {
+if (canScrollHorizontally) {
+dpos-=mReusableIntPair[0];
+}
+if (canScrollVertically) {
+dpos-=mReusableIntPair[1];
+}
+}
+return dpos;
+}
 static class Observable<T> {
 protected final ArrayList<T> mObservers=new ArrayList<T>();
 public void unregisterObserver(T observer){
@@ -3832,17 +3900,5 @@ return false;
 }
 static class InputDevice {
 public static final int SOURCE_MOUSE=0;
-}
-static class NestedScrollingChildHelper {
-public NestedScrollingChildHelper(View view){
-}
-public boolean dispatchNestedScroll(int dxConsumed,int dyConsumed,int dxUnconsumed,int dyUnconsumed,int[] offsetInWindow){
-return false;
-}
-public void dispatchNestedScroll(int dxConsumed,int dyConsumed,int dxUnconsumed,int dyUnconsumed,int[] offsetInWindow,int type,int[] consumed){
-}
-public boolean dispatchNestedScroll(int dxConsumed,int dyConsumed,int dxUnconsumed,int dyUnconsumed,int[] offsetInWindow,int type){
-return false;
-}
 }
 }
