@@ -20,7 +20,7 @@ import java.util.List;
  * If you don't customize getId() or hasSameContentAs(), the default implementations will return false,
  * meaning your Group will consider every update a complete change of everything.
  */
-@Deprecated
+//@Deprecated
 public class UpdatingGroup extends NestedGroup {
 
     private ListUpdateCallback listUpdateCallback = new ListUpdateCallback() {

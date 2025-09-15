@@ -430,7 +430,7 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager {
      * @deprecated Use {@link #calculateExtraLayoutSpace(RecyclerView.State, int[])} instead.
      */
     @SuppressWarnings("DeprecatedIsStillUsed")
-    @Deprecated
+    //@Deprecated
     protected int getExtraLayoutSpace(RecyclerView.State state) {
         if (state.hasTargetScrollPosition()) {
             return mOrientationHelper.getTotalSpace();

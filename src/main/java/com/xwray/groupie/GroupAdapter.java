@@ -337,7 +337,7 @@ public class GroupAdapter<VH extends GroupieViewHolder> extends RecyclerView.Ada
      * This returns the total number of items contained in the top level group at the passed index
      * @deprecated This method has been deprecated in favour of {@link #getItemCountForGroup(int)}. Please use that method instead.
      */
-    @Deprecated
+    //@Deprecated
     public int getItemCount(int groupIndex) {
         return getItemCountForGroup(groupIndex);
     }
@@ -402,7 +402,7 @@ public class GroupAdapter<VH extends GroupieViewHolder> extends RecyclerView.Ada
      * @param adapterPosition raw adapter position of Group to remove.
      * @deprecated This method has been deprecated in favor of {@link #removeGroupAtAdapterPosition(int)}. Please use that method instead.
      */
-    @Deprecated
+    //@Deprecated
     public void removeGroup(int adapterPosition) {
         removeGroupAtAdapterPosition(adapterPosition);
     }
@@ -463,7 +463,7 @@ public class GroupAdapter<VH extends GroupieViewHolder> extends RecyclerView.Ada
      * @return Group at that position or throws {@link IndexOutOfBoundsException}
      * @deprecated This method is deprecated and has been replaced with {@link #getGroupAtAdapterPosition(int)}. Please use that method instead.
      */
-    @Deprecated
+    //@Deprecated
     @NonNull
      public RVGroup getGroup(int adapterPosition) {
         return getGroupAtAdapterPosition(adapterPosition);
