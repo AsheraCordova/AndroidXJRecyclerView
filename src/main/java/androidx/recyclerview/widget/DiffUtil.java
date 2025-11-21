@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 /*
  * Copyright 2018 The Android Open Source Project
  *
@@ -94,7 +109,7 @@ public class DiffUtil {
     // Myers' algorithm uses two lists as axis labels. In DiffUtil's implementation, `x` axis is
     // used for old list and `y` axis is used for new list.
 
-    /**
+   /**
      * Calculates the list of update operations that can covert one list into the other one.
      *
      * @param cb The callback that acts as a gateway to the backing list data
@@ -106,7 +121,7 @@ public class DiffUtil {
         return calculateDiff(cb, true);
     }
 
-    /**
+   /**
      * Calculates the list of update operations that can covert one list into the other one.
      * <p>
      * If your old and new lists are sorted by the same constraint and items never move (swap
@@ -179,7 +194,7 @@ public class DiffUtil {
                 detectMoves);
     }
 
-    /**
+   /**
      * Finds a middle snake in the given range.
      */
     @Nullable
@@ -326,25 +341,25 @@ public class DiffUtil {
         return null;
     }
 
-    /**
+   /**
      * A Callback class used by DiffUtil while calculating the diff between two lists.
      */
     public abstract static class Callback {
-        /**
+       /**
          * Returns the size of the old list.
          *
          * @return The size of the old list.
          */
         public abstract int getOldListSize();
 
-        /**
+       /**
          * Returns the size of the new list.
          *
          * @return The size of the new list.
          */
         public abstract int getNewListSize();
 
-        /**
+       /**
          * Called by the DiffUtil to decide whether two object represent the same Item.
          * <p>
          * For example, if your items have unique ids, this method should check their id equality.
@@ -355,7 +370,7 @@ public class DiffUtil {
          */
         public abstract boolean areItemsTheSame(int oldItemPosition, int newItemPosition);
 
-        /**
+       /**
          * Called by the DiffUtil when it wants to check whether two items have the same data.
          * DiffUtil uses this information to detect if the contents of an item has changed.
          * <p>
@@ -375,7 +390,7 @@ public class DiffUtil {
          */
         public abstract boolean areContentsTheSame(int oldItemPosition, int newItemPosition);
 
-        /**
+       /**
          * When {@link #areItemsTheSame(int, int)} returns {@code true} for two items and
          * {@link #areContentsTheSame(int, int)} returns false for them, DiffUtil
          * calls this method to get a payload about the change.
@@ -397,7 +412,7 @@ public class DiffUtil {
         }
     }
 
-    /**
+   /**
      * Callback for calculating the diff between two non-null items in a list.
      * <p>
      * {@link Callback} serves two roles - list indexing, and item diffing. ItemCallback handles
@@ -407,7 +422,7 @@ public class DiffUtil {
      * @param <T> Type of items to compare.
      */
     public abstract static class ItemCallback<T> {
-        /**
+       /**
          * Called to check whether two objects represent the same item.
          * <p>
          * For example, if your items have unique ids, this method should check their id equality.
@@ -423,7 +438,7 @@ public class DiffUtil {
          */
         public abstract boolean areItemsTheSame(@NonNull T oldItem, @NonNull T newItem);
 
-        /**
+       /**
          * Called to check whether two items have the same data.
          * <p>
          * This information is used to detect if the contents of an item have changed.
@@ -448,7 +463,7 @@ public class DiffUtil {
          */
         public abstract boolean areContentsTheSame(@NonNull T oldItem, @NonNull T newItem);
 
-        /**
+       /**
          * When {@link #areItemsTheSame(T, T)} returns {@code true} for two items and
          * {@link #areContentsTheSame(T, T)} returns false for them, this method is called to
          * get a payload about the change.
@@ -469,7 +484,7 @@ public class DiffUtil {
         }
     }
 
-    /**
+   /**
      * A diagonal is a match in the graph.
      * Rather than snakes, we only record the diagonals in the path.
      */
@@ -493,33 +508,33 @@ public class DiffUtil {
         }
     }
 
-    /**
+   /**
      * Snakes represent a match between two lists. It is optionally prefixed or postfixed with an
      * add or remove operation. See the Myers' paper for details.
      */
     @SuppressWarnings("WeakerAccess")
     static class Snake {
-        /**
+       /**
          * Position in the old list
          */
         public int startX;
 
-        /**
+       /**
          * Position in the new list
          */
         public int startY;
 
-        /**
+       /**
          * End position in the old list, exclusive
          */
         public int endX;
 
-        /**
+       /**
          * End position in the new list, exclusive
          */
         public int endY;
 
-        /**
+       /**
          * True if this snake was created in the reverse search, false otherwise.
          */
         public boolean reverse;
@@ -536,7 +551,7 @@ public class DiffUtil {
             return Math.min(endX - startX, endY - startY);
         }
 
-        /**
+       /**
          * Extract the diagonal of the snake to make reasoning easier for the rest of the
          * algorithm where we try to produce a path and also find moves.
          */
@@ -561,7 +576,7 @@ public class DiffUtil {
         }
     }
 
-    /**
+   /**
      * Represents a range in two lists that needs to be solved.
      * <p>
      * This internal class is used when running Myers' algorithm without recursion.
@@ -593,7 +608,7 @@ public class DiffUtil {
         }
     }
 
-    /**
+   /**
      * This class holds the information about the result of a
      * {@link DiffUtil#calculateDiff(Callback, boolean)} call.
      * <p>
@@ -602,13 +617,13 @@ public class DiffUtil {
      * {@link RecyclerView.Adapter} via {@link #dispatchUpdatesTo(RecyclerView.Adapter)}.
      */
     public static class DiffResult {
-        /**
+       /**
          * Signifies an item not present in the list.
          */
         public static final int NO_POSITION = -1;
 
 
-        /**
+       /**
          * While reading the flags below, keep in mind that when multiple items move in a list,
          * Myers's may pick any of them as the anchor item and consider that one NOT_CHANGED while
          * picking others as additions and removals. This is completely fine as we later detect
@@ -653,7 +668,7 @@ public class DiffUtil {
 
         private final boolean mDetectMoves;
 
-        /**
+       /**
          * @param callback        The callback that was used to calculate the diff
          * @param diagonals       Matches between the two lists
          * @param oldItemStatuses An int[] that can be re-purposed to keep metadata
@@ -675,7 +690,7 @@ public class DiffUtil {
             findMatchingItems();
         }
 
-        /**
+       /**
          * Add edge diagonals so that we can iterate as long as there are diagonals w/o lots of
          * null checks around
          */
@@ -689,7 +704,7 @@ public class DiffUtil {
             mDiagonals.add(new Diagonal(mOldListSize, mNewListSize, 0));
         }
 
-        /**
+       /**
          * Find position mapping from old list to new list.
          * If moves are requested, we'll also try to do an n^2 search between additions and
          * removals to find moves.
@@ -729,7 +744,7 @@ public class DiffUtil {
             }
         }
 
-        /**
+       /**
          * Search the whole list to find the addition for the given removal of position posX
          *
          * @param posX position in the old list
@@ -760,7 +775,7 @@ public class DiffUtil {
             }
         }
 
-        /**
+       /**
          * Given a position in the old list, returns the position in the new list, or
          * {@code NO_POSITION} if it was removed.
          *
@@ -782,7 +797,7 @@ public class DiffUtil {
             }
         }
 
-        /**
+       /**
          * Given a position in the new list, returns the position in the old list, or
          * {@code NO_POSITION} if it was removed.
          *
@@ -804,7 +819,7 @@ public class DiffUtil {
             }
         }
 
-        /**
+       /**
          * Dispatches the update events to the given adapter.
          * <p>
          * For example, if you have an {@link RecyclerView.Adapter Adapter}
@@ -840,7 +855,7 @@ public class DiffUtil {
             dispatchUpdatesTo(new AdapterListUpdateCallback(adapter));
         }
 
-        /**
+       /**
          * Dispatches update operations to the given Callback.
          * <p>
          * These updates are atomic such that the first update call affects every update call that
@@ -995,7 +1010,7 @@ public class DiffUtil {
         }
     }
 
-    /**
+   /**
      * Represents an update that we skipped because it was a move.
      * <p>
      * When an update is skipped, it is tracked as other updates are dispatched until the matching
@@ -1003,17 +1018,17 @@ public class DiffUtil {
      * update.
      */
     private static class PostponedUpdate {
-        /**
+       /**
          * position in the list that owns this item
          */
         int posInOwnerList;
 
-        /**
+       /**
          * position wrt to the end of the list
          */
         int currentPos;
 
-        /**
+       /**
          * true if this is a removal, false otherwise
          */
         boolean removal;
@@ -1025,7 +1040,7 @@ public class DiffUtil {
         }
     }
 
-    /**
+   /**
      * Array wrapper w/ negative index support.
      * We use this array instead of a regular array so that algorithm is easier to read without
      * too many offsets when accessing the "k" array in the algorithm.

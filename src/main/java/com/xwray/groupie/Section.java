@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.xwray.groupie;
 
 import r.android.annotation.NonNull;
@@ -131,7 +146,7 @@ public class Section extends NestedGroup {
         refreshEmptyState();
     }
 
-    /**
+   /**
      * Get the list of all groups in this section, wrapped in a new {@link ArrayList}. This
      * does <strong>not include headers, footers or placeholders</strong>.
      * @return The list of all groups in this section, wrapped in a new {@link ArrayList}
@@ -140,7 +155,7 @@ public class Section extends NestedGroup {
         return new ArrayList<>(this.children);
     }
 
-    /**
+   /**
      * Remove all existing body content.
      */
     public void clear() {
@@ -150,7 +165,7 @@ public class Section extends NestedGroup {
         removeAll(new ArrayList<>(children));
     }
 
-    /**
+   /**
      * Replace all existing body content and dispatch fine-grained change notifications to the
      * parent using DiffUtil.
      * <p>
@@ -170,7 +185,7 @@ public class Section extends NestedGroup {
         update(newBodyGroups, true);
     }
 
-    /**
+   /**
      * Replace all existing body content and dispatch fine-grained change notifications to the
      * parent using DiffUtil.
      * <p>
@@ -191,7 +206,7 @@ public class Section extends NestedGroup {
         this.update(newBodyGroups, diffResult);
     }
 
-    /**
+   /**
      * Overloaded version of update method in which you can pass your own DiffUtil.DiffResult
      * @param newBodyGroups The new content of the section
      * @param diffResult
@@ -229,7 +244,7 @@ public class Section extends NestedGroup {
         }
     };
 
-    /**
+   /**
      * Optional. Set a placeholder for when the section's body is empty.
      * <p>
      * If setHideWhenEmpty(true) is set, then the empty placeholder will not be shown.
@@ -264,7 +279,7 @@ public class Section extends NestedGroup {
         notifyItemRangeRemoved(getHeaderItemCount(), placeholder.getItemCount());
     }
 
-    /**
+   /**
      * Whether a section's contents are visually empty
      *
      * @return

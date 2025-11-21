@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 /*
  * Copyright 2018 The Android Open Source Project
  *
@@ -35,72 +50,72 @@ class ViewBoundsCheck {
 
 
     static final int CVS_PVS_POS = 0;
-    /**
+   /**
      * The child view's start should be strictly greater than parent view's start.
      */
     static final int FLAG_CVS_GT_PVS = GT << CVS_PVS_POS;
 
-    /**
+   /**
      * The child view's start can be equal to its parent view's start. This flag follows with GT
      * or LT indicating greater (less) than or equal relation.
      */
     static final int FLAG_CVS_EQ_PVS = EQ << CVS_PVS_POS;
 
-    /**
+   /**
      * The child view's start should be strictly less than parent view's start.
      */
     static final int FLAG_CVS_LT_PVS = LT << CVS_PVS_POS;
 
 
     static final int CVS_PVE_POS = 4;
-    /**
+   /**
      * The child view's start should be strictly greater than parent view's end.
      */
     static final int FLAG_CVS_GT_PVE = GT << CVS_PVE_POS;
 
-    /**
+   /**
      * The child view's start can be equal to its parent view's end. This flag follows with GT
      * or LT indicating greater (less) than or equal relation.
      */
     static final int FLAG_CVS_EQ_PVE = EQ << CVS_PVE_POS;
 
-    /**
+   /**
      * The child view's start should be strictly less than parent view's end.
      */
     static final int FLAG_CVS_LT_PVE = LT << CVS_PVE_POS;
 
 
     static final int CVE_PVS_POS = 8;
-    /**
+   /**
      * The child view's end should be strictly greater than parent view's start.
      */
     static final int FLAG_CVE_GT_PVS = GT << CVE_PVS_POS;
 
-    /**
+   /**
      * The child view's end can be equal to its parent view's start. This flag follows with GT
      * or LT indicating greater (less) than or equal relation.
      */
     static final int FLAG_CVE_EQ_PVS = EQ << CVE_PVS_POS;
 
-    /**
+   /**
      * The child view's end should be strictly less than parent view's start.
      */
     static final int FLAG_CVE_LT_PVS = LT << CVE_PVS_POS;
 
 
     static final int CVE_PVE_POS = 12;
-    /**
+   /**
      * The child view's end should be strictly greater than parent view's end.
      */
     static final int FLAG_CVE_GT_PVE = GT << CVE_PVE_POS;
 
-    /**
+   /**
      * The child view's end can be equal to its parent view's end. This flag follows with GT
      * or LT indicating greater (less) than or equal relation.
      */
     static final int FLAG_CVE_EQ_PVE = EQ << CVE_PVE_POS;
 
-    /**
+   /**
      * The child view's end should be strictly less than parent view's end.
      */
     static final int FLAG_CVE_LT_PVE = LT << CVE_PVE_POS;
@@ -109,7 +124,7 @@ class ViewBoundsCheck {
 
     final Callback mCallback;
     BoundFlags mBoundFlags;
-    /**
+   /**
      * The set of flags that can be passed for checking the view boundary conditions.
      * CVS in the flag name indicates the child view, and PV indicates the parent view.\
      * The following S, E indicate a view's start and end points, respectively.
@@ -190,7 +205,7 @@ class ViewBoundsCheck {
         }
     };
 
-    /**
+   /**
      * Returns the first view starting from fromIndex to toIndex in views whose bounds lie within
      * its parent bounds based on the provided preferredBoundFlags. If no match is found based on
      * the preferred flags, and a nonzero acceptableBoundFlags is specified, the last view whose
@@ -238,7 +253,7 @@ class ViewBoundsCheck {
         return acceptableMatch;
     }
 
-    /**
+   /**
      * Returns whether the specified view lies within the boundary condition of its parent view.
      * @param child The child view to be checked.
      * @param boundsFlags The flag against which the child view and parent view are matched.
@@ -255,7 +270,7 @@ class ViewBoundsCheck {
         return false;
     }
 
-    /**
+   /**
      * Callback provided by the user of this class in order to retrieve information about child and
      * parent boundaries.
      */

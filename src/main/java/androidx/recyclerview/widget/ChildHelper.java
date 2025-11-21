@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 /*
  * Copyright 2018 The Android Open Source Project
  *
@@ -51,7 +66,7 @@ class ChildHelper {
         mHiddenViews = new ArrayList<View>();
     }
 
-    /**
+   /**
      * Marks a child view as hidden
      *
      * @param child  View to hide.
@@ -61,7 +76,7 @@ class ChildHelper {
         mCallback.onEnteredHiddenState(child);
     }
 
-    /**
+   /**
      * Unmarks a child view as hidden.
      *
      * @param child  View to hide.
@@ -75,7 +90,7 @@ class ChildHelper {
         }
     }
 
-    /**
+   /**
      * Adds a view to the ViewGroup
      *
      * @param child  View to add.
@@ -85,7 +100,7 @@ class ChildHelper {
         addView(child, -1, hidden);
     }
 
-    /**
+   /**
      * Add a view to the ViewGroup at an index
      *
      * @param child  View to add.
@@ -131,7 +146,7 @@ class ChildHelper {
         return -1;
     }
 
-    /**
+   /**
      * Removes the provided View from underlying RecyclerView.
      *
      * @param view The view to remove.
@@ -150,7 +165,7 @@ class ChildHelper {
         }
     }
 
-    /**
+   /**
      * Removes the view at the provided index from RecyclerView.
      *
      * @param index Index of the child from the regular perspective (excluding hidden views).
@@ -171,7 +186,7 @@ class ChildHelper {
         }
     }
 
-    /**
+   /**
      * Returns the child at provided index.
      *
      * @param index Index of the child to return in regular perspective.
@@ -181,7 +196,7 @@ class ChildHelper {
         return mCallback.getChildAt(offset);
     }
 
-    /**
+   /**
      * Removes all views from the ViewGroup including the hidden ones.
      */
     void removeAllViewsUnfiltered() {
@@ -196,7 +211,7 @@ class ChildHelper {
         }
     }
 
-    /**
+   /**
      * This can be used to find a disappearing view by position.
      *
      * @param position The adapter position of the item.
@@ -216,7 +231,7 @@ class ChildHelper {
         return null;
     }
 
-    /**
+   /**
      * Attaches the provided view to the underlying ViewGroup.
      *
      * @param child        Child to attach.
@@ -243,7 +258,7 @@ class ChildHelper {
         }
     }
 
-    /**
+   /**
      * Returns the number of children that are not hidden.
      *
      * @return Number of children that are not hidden.
@@ -253,7 +268,7 @@ class ChildHelper {
         return mCallback.getChildCount() - mHiddenViews.size();
     }
 
-    /**
+   /**
      * Returns the total number of children.
      *
      * @return The total number of children including the hidden views.
@@ -263,7 +278,7 @@ class ChildHelper {
         return mCallback.getChildCount();
     }
 
-    /**
+   /**
      * Returns a child by ViewGroup offset. ChildHelper won't offset this index.
      *
      * @param index ViewGroup index of the child to return.
@@ -273,7 +288,7 @@ class ChildHelper {
         return mCallback.getChildAt(index);
     }
 
-    /**
+   /**
      * Detaches the view at the provided index.
      *
      * @param index Index of the child to return in regular perspective.
@@ -287,7 +302,7 @@ class ChildHelper {
         }
     }
 
-    /**
+   /**
      * Returns the index of the child in regular perspective.
      *
      * @param child The child whose index will be returned.
@@ -309,7 +324,7 @@ class ChildHelper {
         return index - mBucket.countOnesBefore(index);
     }
 
-    /**
+   /**
      * Returns whether a View is visible to LayoutManager or not.
      *
      * @param view The child view to check. Should be a child of the Callback.
@@ -319,7 +334,7 @@ class ChildHelper {
         return mHiddenViews.contains(view);
     }
 
-    /**
+   /**
      * Marks a child view as hidden.
      *
      * @param view The view to hide.
@@ -339,7 +354,7 @@ class ChildHelper {
         }
     }
 
-    /**
+   /**
      * Moves a child view from hidden list to regular list.
      * Calling this method should probably be followed by a detach, otherwise, it will suddenly
      * show up in LayoutManager's children list.
@@ -363,7 +378,7 @@ class ChildHelper {
         return mBucket.toString() + ", hidden list:" + mHiddenViews.size();
     }
 
-    /**
+   /**
      * Removes a view from the ViewGroup if it is hidden.
      *
      * @param view The view to remove.
@@ -389,7 +404,7 @@ class ChildHelper {
         return false;
     }
 
-    /**
+   /**
      * Bitset implementation that provides methods to offset indices.
      */
     static class Bucket {

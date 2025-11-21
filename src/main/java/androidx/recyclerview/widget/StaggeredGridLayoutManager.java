@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 /*
  * Copyright 2018 The Android Open Source Project
  *
@@ -58,19 +73,19 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
 
     public static final int VERTICAL = RecyclerView.VERTICAL;
 
-    /**
+   /**
      * Does not do anything to hide gaps.
      */
     public static final int GAP_HANDLING_NONE = 0;
 
-    /**
+   /**
      * @deprecated No longer supported.
      */
     @SuppressWarnings("unused")
     //@Deprecated
     public static final int GAP_HANDLING_LAZY = 1;
 
-    /**
+   /**
      * When scroll state is changed to {@link RecyclerView#SCROLL_STATE_IDLE}, StaggeredGrid will
      * check if there are gaps in the because of full span items. If it finds, it will re-layout
      * and move items to correct positions with animations.
@@ -92,21 +107,21 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
     public static final int GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS = 2;
 
     static final int INVALID_OFFSET = Integer.MIN_VALUE;
-    /**
+   /**
      * While trying to find next view to focus, LayoutManager will not try to scroll more
      * than this factor times the total space of the list. If layout is vertical, total space is the
      * height minus padding, if layout is horizontal, total space is the width minus padding.
      */
     private static final float MAX_SCROLL_FACTOR = 1 / 3f;
 
-    /**
+   /**
      * Number of spans
      */
     private int mSpanCount = -1;
 
     Span[] mSpans;
 
-    /**
+   /**
      * Primary orientation is the layout's orientation, secondary orientation is the orientation
      * for spans. Having both makes code much cleaner for calculations.
      */
@@ -117,7 +132,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
 
     private int mOrientation;
 
-    /**
+   /**
      * The width or height per span, depending on the orientation.
      */
     private int mSizePerSpan;
@@ -127,71 +142,71 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
 
     boolean mReverseLayout = false;
 
-    /**
+   /**
      * Aggregated reverse layout value that takes RTL into account.
      */
     boolean mShouldReverseLayout = false;
 
-    /**
+   /**
      * Temporary variable used during fill method to check which spans needs to be filled.
      */
     private BitSet mRemainingSpans;
 
-    /**
+   /**
      * When LayoutManager needs to scroll to a position, it sets this variable and requests a
      * layout which will check this variable and re-layout accordingly.
      */
     int mPendingScrollPosition = RecyclerView.NO_POSITION;
 
-    /**
+   /**
      * Used to keep the offset value when {@link #scrollToPositionWithOffset(int, int)} is
      * called.
      */
     int mPendingScrollPositionOffset = INVALID_OFFSET;
 
-    /**
+   /**
      * Keeps the mapping between the adapter positions and spans. This is necessary to provide
      * a consistent experience when user scrolls the list.
      */
     LazySpanLookup mLazySpanLookup = new LazySpanLookup();
 
-    /**
+   /**
      * how we handle gaps in UI.
      */
     private int mGapStrategy = GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS;
 
-    /**
+   /**
      * Saved state needs this information to properly layout on restore.
      */
     private boolean mLastLayoutFromEnd;
 
-    /**
+   /**
      * Saved state and onLayout needs this information to re-layout properly
      */
     private boolean mLastLayoutRTL;
 
-    /**
+   /**
      * SavedState is not handled until a layout happens. This is where we keep it until next
      * layout.
      */
     private SavedState mPendingSavedState;
 
-    /**
+   /**
      * Re-used measurement specs. updated by onLayout.
      */
     private int mFullSizeSpec;
 
-    /**
+   /**
      * Re-used rectangle to get child decor offsets.
      */
     private final Rect mTmpRect = new Rect();
 
-    /**
+   /**
      * Re-used anchor info.
      */
     private final AnchorInfo mAnchorInfo = new AnchorInfo();
 
-    /**
+   /**
      * If a full span item is invalid / or created in reverse direction; it may create gaps in
      * the UI. While laying out, if such case is detected, we set this flag.
      * <p>
@@ -199,13 +214,13 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
      */
     private boolean mLaidOutInvalidFullSpan = false;
 
-    /**
+   /**
      * Works the same way as {@link r.android.widget.AbsListView#setSmoothScrollbarEnabled(boolean)}.
      * see {@link r.android.widget.AbsListView#setSmoothScrollbarEnabled(boolean)}
      */
     private boolean mSmoothScrollbarEnabled = true;
 
-    /**
+   /**
      * Temporary array used (solely in {@link #collectAdjacentPrefetchPositions}) for stashing and
      * sorting distances to views being prefetched.
      */
@@ -218,14 +233,14 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         }
     };
 
-    /**
+   /**
      * Constructor used when layout manager is set in XML by RecyclerView attribute
      * "layoutManager". Defaults to single column and vertical.
      */
     @SuppressWarnings("unused")
     /**/
 
-    /**
+   /**
      * Creates a StaggeredGridLayoutManager with given parameters.
      *
      * @param spanCount   If orientation is vertical, spanCount is number of columns. If
@@ -250,7 +265,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
                 .createOrientationHelper(this, 1 - mOrientation);
     }
 
-    /**
+   /**
      * Checks for gaps in the UI that may be caused by adapter changes.
      * <p>
      * When a full span item is laid out in reverse direction, it sets a flag which we check when
@@ -320,7 +335,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         view.requestLayout();
     }
 
-    /**
+   /**
      * Checks for gaps if we've reached to the top of the list.
      * <p>
      * Intermediate gaps created by full span items are tracked via mLaidOutInvalidFullSpan field.
@@ -406,7 +421,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return false;
     }
 
-    /**
+   /**
      * Sets the number of spans for the layout. This will invalidate all of the span assignments
      * for Views.
      * <p>
@@ -429,7 +444,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
-    /**
+   /**
      * Sets the orientation of the layout. StaggeredGridLayoutManager will do its best to keep
      * scroll position if this method is called after views are laid out.
      *
@@ -450,7 +465,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         requestLayout();
     }
 
-    /**
+   /**
      * Sets whether LayoutManager should start laying out items from the end of the UI. The order
      * items are traversed is not affected by this call.
      * <p>
@@ -472,7 +487,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         requestLayout();
     }
 
-    /**
+   /**
      * Returns the current gap handling strategy for StaggeredGridLayoutManager.
      * <p>
      * Staggered grid may have gaps in the layout due to changes in the adapter. To avoid gaps,
@@ -490,7 +505,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return mGapStrategy;
     }
 
-    /**
+   /**
      * Sets the gap handling strategy for StaggeredGridLayoutManager. If the gapStrategy parameter
      * is different than the current strategy, calling this method will trigger a layout request.
      *
@@ -520,7 +535,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
-    /**
+   /**
      * Returns the number of spans laid out by StaggeredGridLayoutManager.
      *
      * @return Number of spans in the layout
@@ -529,7 +544,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return mSpanCount;
     }
 
-    /**
+   /**
      * For consistency, StaggeredGridLayoutManager keeps a mapping between spans and items.
      * <p>
      * If you need to cancel current assignments, you can call this method which will clear all
@@ -540,7 +555,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         requestLayout();
     }
 
-    /**
+   /**
      * Calculates the views' layout order. (e.g. from end to start or start to end)
      * RTL layout support is applied automatically. So if layout is RTL and
      * {@link #getReverseLayout()} is {@code true}, elements will be laid out starting from left.
@@ -558,7 +573,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return getLayoutDirection() == ViewCompat.LAYOUT_DIRECTION_RTL;
     }
 
-    /**
+   /**
      * Returns whether views are laid out in reverse order or not.
      * <p>
      * Not that this value is not affected by RecyclerView's layout direction.
@@ -934,7 +949,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return mPendingSavedState == null;
     }
 
-    /**
+   /**
      * Returns the adapter position of the first visible view for each span.
      * <p>
      * Note that, this value is not affected by layout orientation or item order traversal.
@@ -966,7 +981,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return into;
     }
 
-    /**
+   /**
      * Returns the adapter position of the first completely visible view for each span.
      * <p>
      * Note that, this value is not affected by layout orientation or item order traversal.
@@ -998,7 +1013,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return into;
     }
 
-    /**
+   /**
      * Returns the adapter position of the last visible view for each span.
      * <p>
      * Note that, this value is not affected by layout orientation or item order traversal.
@@ -1030,7 +1045,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return into;
     }
 
-    /**
+   /**
      * Returns the adapter position of the last completely visible view for each span.
      * <p>
      * Note that, this value is not affected by layout orientation or item order traversal.
@@ -1281,7 +1296,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
     }
 
 
-    /**
+   /**
      * Finds the first fully visible child to be used as an anchor child if span count changes when
      * state is restored. If no children is fully visible, returns a partially visible child instead
      * of returning null.
@@ -1292,7 +1307,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return first == null ? RecyclerView.NO_POSITION : getPosition(first);
     }
 
-    /**
+   /**
      * This is for internal use. Not necessarily the child closest to start but the first child
      * we find that matches the criteria.
      * This method does not do any sorting based on child's start coordinate, instead, it uses
@@ -1322,7 +1337,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return partiallyVisible;
     }
 
-    /**
+   /**
      * This is for internal use. Not necessarily the child closest to bottom but the first child
      * we find that matches the criteria.
      * This method does not do any sorting based on child's end coordinate, instead, it uses
@@ -1469,7 +1484,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         handleUpdate(positionStart, itemCount, AdapterHelper.UpdateOp.UPDATE);
     }
 
-    /**
+   /**
      * Checks whether it should invalidate span assignments in response to an adapter change.
      */
     private void handleUpdate(int positionStart, int itemCountOrToPosition, int cmd) {
@@ -1908,7 +1923,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
-    /**
+   /**
      * @return True if last span is the first one we want to fill
      */
     private boolean preferLastSpan(int layoutDir) {
@@ -1918,7 +1933,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return ((layoutDir == LayoutState.LAYOUT_START) == mShouldReverseLayout) == isLayoutRTL();
     }
 
-    /**
+   /**
      * Finds the span for the next view.
      */
     private Span getNextSpan(LayoutState layoutState) {
@@ -2004,7 +2019,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         requestLayout();
     }
 
-    /**
+   /**
      * Scroll to the specified adapter position with the given offset from layout start.
      * <p>
      * Note that scroll position change will not be reflected until the next layout call.
@@ -2026,12 +2041,12 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         requestLayout();
     }
 
-    /** @hide */
+   /** @hide */
     @Override
     //@RestrictTo(LIBRARY)
     public void collectAdjacentPrefetchPositions(int dx, int dy, RecyclerView.State state,
             LayoutPrefetchRegistry layoutPrefetchRegistry) {
-        /* This method uses the simplifying assumption that the next N items (where N = span count)
+       /* This method uses the simplifying assumption that the next N items (where N = span count)
          * will be assigned, one-to-one, to spans, where ordering is based on which span  extends
          * least beyond the viewport.
          *
@@ -2131,7 +2146,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return childCount == 0 ? 0 : getPosition(getChildAt(0));
     }
 
-    /**
+   /**
      * Finds the first View that can be used as an anchor View.
      *
      * @return Position of the View or 0 if it cannot find any such View.
@@ -2148,7 +2163,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return 0;
     }
 
-    /**
+   /**
      * Finds the last View that can be used as an anchor View.
      *
      * @return Position of the View or 0 if it cannot find any such View.
@@ -2288,7 +2303,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         return null;
     }
 
-    /**
+   /**
      * Converts a focusDirection to orientation.
      *
      * @param focusDirection One of {@link View#FOCUS_UP}, {@link View#FOCUS_DOWN},
@@ -2337,7 +2352,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
 
     }
 
-    /**
+   /**
      * LayoutParams used by StaggeredGridLayoutManager.
      * <p>
      * Note that if the orientation is {@link #VERTICAL}, the width parameter is ignored and if the
@@ -2346,7 +2361,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
      */
     public static class LayoutParams extends RecyclerView.LayoutParams {
 
-        /**
+       /**
          * Span Id for Views that are not laid out yet.
          */
         public static final int INVALID_SPAN_ID = -1;
@@ -2374,7 +2389,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
             super(source);
         }
 
-        /**
+       /**
          * When set to true, the item will layout using all span area. That means, if orientation
          * is vertical, the view will have full width; if orientation is horizontal, the view will
          * have full height.
@@ -2386,7 +2401,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
             mFullSpan = fullSpan;
         }
 
-        /**
+       /**
          * Returns whether this View occupies all available spans or just one.
          *
          * @return True if the View occupies all spans or false otherwise.
@@ -2396,7 +2411,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
             return mFullSpan;
         }
 
-        /**
+       /**
          * Returns the Span index to which this View is assigned.
          *
          * @return The Span index of the View. If View is not yet assigned to any span, returns
@@ -2634,7 +2649,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
                     : findOneVisibleChild(mViews.size() - 1, -1, true);
         }
 
-        /**
+       /**
          * Returns the first view within this span that is partially or fully visible. Partially
          * visible refers to a view that overlaps but is not fully contained within RV's padded
          * bounded area. This view returned can be defined to have an area of overlap strictly
@@ -2702,7 +2717,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
                     acceptEndPointInclusion);
         }
 
-        /**
+       /**
          * Depending on the layout direction, returns the View that is after the given position.
          */
         public View getFocusableViewAfter(int referenceChildPosition, int layoutDir) {
@@ -2739,7 +2754,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
-    /**
+   /**
      * An array of mappings from adapter position to span.
      * This only grows when a write happens and it grows up to the size of the adapter.
      */
@@ -2750,7 +2765,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         List<FullSpanItem> mFullSpanItems;
 
 
-        /**
+       /**
          * Invalidates everything after this position, including full span information
          */
         int forceInvalidateAfter(int position) {
@@ -2765,7 +2780,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
             return invalidateAfter(position);
         }
 
-        /**
+       /**
          * returns end position for invalidation.
          */
         int invalidateAfter(int position) {
@@ -2883,7 +2898,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
             }
         }
 
-        /**
+       /**
          * Returns when invalidation should end. e.g. hitting a full span position.
          * Returned position SHOULD BE invalidated.
          */
@@ -2949,7 +2964,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
             return null;
         }
 
-        /**
+       /**
          * @param minPos inclusive
          * @param maxPos exclusive
          * @param gapDir if not 0, returns FSIs on in that direction
@@ -2976,7 +2991,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
             return null;
         }
 
-        /**
+       /**
          * We keep information about full span items because they may create gaps in the UI.
          */
         @SuppressLint("BanParcelableUsage")
@@ -3040,7 +3055,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
-    /**
+   /**
      * @hide
      */
     //@RestrictTo(LIBRARY)
@@ -3138,7 +3153,7 @@ public class StaggeredGridLayoutManager extends RecyclerView.LayoutManager {
         /**/
     }
 
-    /**
+   /**
      * Data class to hold the information about an anchor position which is used in onLayout call.
      */
     class AnchorInfo {

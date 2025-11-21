@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 /*
  * Copyright 2018 The Android Open Source Project
  *
@@ -38,18 +53,18 @@ public class GridLayoutManager extends LinearLayoutManager {
     private static final boolean DEBUG = false;
     private static final String TAG = "GridLayoutManager";
     public static final int DEFAULT_SPAN_COUNT = -1;
-    /**
+   /**
      * Span size have been changed but we've not done a new layout calculation.
      */
     boolean mPendingSpanCountChange = false;
     int mSpanCount = DEFAULT_SPAN_COUNT;
-    /**
+   /**
      * Right borders for each span.
      * <p>For <b>i-th</b> item start is {@link #mCachedBorders}[i-1] + 1
      * and end is {@link #mCachedBorders}[i].
      */
     int [] mCachedBorders;
-    /**
+   /**
      * Temporary array to keep views in layoutChunk method
      */
     View[] mSet;
@@ -61,7 +76,7 @@ public class GridLayoutManager extends LinearLayoutManager {
 
     private boolean mUsingSpansToEstimateScrollBarDimensions;
 
-    /**
+   /**
      * Constructor used when layout manager is set in XML by RecyclerView attribute
      * "layoutManager". If spanCount is not specified in the XML, it defaults to a
      * single column.
@@ -70,7 +85,7 @@ public class GridLayoutManager extends LinearLayoutManager {
      */
     /**/
 
-    /**
+   /**
      * Creates a vertical GridLayoutManager
      *
      * @param context Current context, will be used to access resources.
@@ -81,7 +96,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         setSpanCount(spanCount);
     }
 
-    /**
+   /**
      * @param context Current context, will be used to access resources.
      * @param spanCount The number of columns or rows in the grid
      * @param orientation Layout orientation. Should be {@link #HORIZONTAL} or {@link
@@ -94,7 +109,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         setSpanCount(spanCount);
     }
 
-    /**
+   /**
      * stackFromEnd is not supported by GridLayoutManager. Consider using
      * {@link #setReverseLayout(boolean)}.
      */
@@ -219,7 +234,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         return lp instanceof LayoutParams;
     }
 
-    /**
+   /**
      * Sets the source to get the number of spans occupied by each item in the adapter.
      *
      * @param spanSizeLookup {@link SpanSizeLookup} instance to be used to query number of spans
@@ -229,7 +244,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         mSpanSizeLookup = spanSizeLookup;
     }
 
-    /**
+   /**
      * Returns the current {@link SpanSizeLookup} used by the GridLayoutManager.
      *
      * @return The current {@link SpanSizeLookup} used by the GridLayoutManager.
@@ -270,14 +285,14 @@ public class GridLayoutManager extends LinearLayoutManager {
         setMeasuredDimension(width, height);
     }
 
-    /**
+   /**
      * @param totalSpace Total available space after padding is removed
      */
     private void calculateItemBorders(int totalSpace) {
         mCachedBorders = calculateItemBorders(mCachedBorders, mSpanCount, totalSpace);
     }
 
-    /**
+   /**
      * @param cachedBorders The out array
      * @param spanCount number of spans
      * @param totalSpace total available space after padding is removed
@@ -676,7 +691,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         Arrays.fill(mSet, null);
     }
 
-    /**
+   /**
      * Measures a child with currently known information. This is not necessarily the child's final
      * measurement. (see fillChunk for details).
      *
@@ -709,7 +724,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         measureChildWithDecorationsAndMargin(view, wSpec, hSpec, alreadyMeasured);
     }
 
-    /**
+   /**
      * This is called after laying out a row (if vertical) or a column (if horizontal) when the
      * RecyclerView does not have exact measurement specs.
      * <p>
@@ -764,7 +779,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         }
     }
 
-    /**
+   /**
      * Returns the number of spans laid out by this grid.
      *
      * @return The number of spans
@@ -774,7 +789,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         return mSpanCount;
     }
 
-    /**
+   /**
      * Sets the number of spans to be laid out.
      * <p>
      * If {@link #getOrientation()} is {@link #VERTICAL}, this is the number of columns.
@@ -797,7 +812,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         requestLayout();
     }
 
-    /**
+   /**
      * A helper class to provide the number of spans each item occupies.
      * <p>
      * Default implementation sets each item to occupy exactly 1 span.
@@ -812,7 +827,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         private boolean mCacheSpanIndices = false;
         private boolean mCacheSpanGroupIndices = false;
 
-        /**
+       /**
          * Returns the number of span occupied by the item at <code>position</code>.
          *
          * @param position The adapter position of the item
@@ -820,7 +835,7 @@ public class GridLayoutManager extends LinearLayoutManager {
          */
         public abstract int getSpanSize(int position);
 
-        /**
+       /**
          * Sets whether the results of {@link #getSpanIndex(int, int)} method should be cached or
          * not. By default these values are not cached. If you are not overriding
          * {@link #getSpanIndex(int, int)} with something highly performant, you should set this
@@ -835,7 +850,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             mCacheSpanIndices = cacheSpanIndices;
         }
 
-        /**
+       /**
          * Sets whether the results of {@link #getSpanGroupIndex(int, int)} method should be cached
          * or not. By default these values are not cached. If you are not overriding
          * {@link #getSpanGroupIndex(int, int)} with something highly performant, and you are using
@@ -852,7 +867,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             mCacheSpanGroupIndices = cacheSpanGroupIndices;
         }
 
-        /**
+       /**
          * Clears the span index cache. GridLayoutManager automatically calls this method when
          * adapter changes occur.
          */
@@ -860,7 +875,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             mSpanIndexCache.clear();
         }
 
-        /**
+       /**
          * Clears the span group index cache. GridLayoutManager automatically calls this method
          * when adapter changes occur.
          */
@@ -868,7 +883,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             mSpanGroupIndexCache.clear();
         }
 
-        /**
+       /**
          * Returns whether results of {@link #getSpanIndex(int, int)} method are cached or not.
          *
          * @return True if results of {@link #getSpanIndex(int, int)} are cached.
@@ -877,7 +892,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             return mCacheSpanIndices;
         }
 
-        /**
+       /**
          * Returns whether results of {@link #getSpanGroupIndex(int, int)} method are cached or not.
          *
          * @return True if results of {@link #getSpanGroupIndex(int, int)} are cached.
@@ -912,7 +927,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             return value;
         }
 
-        /**
+       /**
          * Returns the final span index of the provided position.
          * <p>
          * If you have a faster way to calculate span index for your items, you should override
@@ -988,7 +1003,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             return -1;
         }
 
-        /**
+       /**
          * Returns the index of the group this position belongs.
          * <p>
          * For example, if grid has 3 columns and each item occupies 1 span, span group index
@@ -1199,7 +1214,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         }
     }
 
-    /**
+   /**
      * When this flag is set, the scroll offset and scroll range calculations will take account
      * of span information.
      *
@@ -1228,7 +1243,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         mUsingSpansToEstimateScrollBarDimensions = useSpansToEstimateScrollBarDimensions;
     }
 
-    /**
+   /**
      * Returns true if the scroll offset and scroll range calculations take account of span
      * information. See {@link #setUsingSpansToEstimateScrollbarDimensions(boolean)} for more
      * information on this topic. Defaults to {@code false}.
@@ -1315,7 +1330,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             - mOrientationHelper.getDecoratedStart(startChild)));
     }
 
-    /**
+   /**
      * Default implementation for {@link SpanSizeLookup}. Each item occupies 1 span.
      */
     public static final class DefaultSpanSizeLookup extends SpanSizeLookup {
@@ -1331,7 +1346,7 @@ public class GridLayoutManager extends LinearLayoutManager {
         }
     }
 
-    /**
+   /**
      * LayoutParams used by GridLayoutManager.
      * <p>
      * Note that if the orientation is {@link #VERTICAL}, the width parameter is ignored and if the
@@ -1340,7 +1355,7 @@ public class GridLayoutManager extends LinearLayoutManager {
      */
     public static class LayoutParams extends RecyclerView.LayoutParams {
 
-        /**
+       /**
          * Span Id for Views that are not laid out yet.
          */
         public static final int INVALID_SPAN_ID = -1;
@@ -1367,7 +1382,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             super(source);
         }
 
-        /**
+       /**
          * Returns the current span index of this View. If the View is not laid out yet, the return
          * value is <code>undefined</code>.
          * <p>
@@ -1385,7 +1400,7 @@ public class GridLayoutManager extends LinearLayoutManager {
             return mSpanIndex;
         }
 
-        /**
+       /**
          * Returns the number of spans occupied by this View. If the View not laid out yet, the
          * return value is <code>undefined</code>.
          *

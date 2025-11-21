@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 /*
  * Copyright 2018 The Android Open Source Project
  *
@@ -47,7 +62,7 @@ public abstract class OrientationHelper {
         mLayoutManager = layoutManager;
     }
 
-    /**
+   /**
      * Returns the {@link RecyclerView.LayoutManager LayoutManager} that
      * is associated with this OrientationHelper.
      */
@@ -55,7 +70,7 @@ public abstract class OrientationHelper {
         return mLayoutManager;
     }
 
-    /**
+   /**
      * Call this method after onLayout method is complete if state is NOT pre-layout.
      * This method records information like layout bounds that might be useful in the next layout
      * calculations.
@@ -64,7 +79,7 @@ public abstract class OrientationHelper {
         mLastTotalSpace = getTotalSpace();
     }
 
-    /**
+   /**
      * Returns the layout space change between the previous layout pass and current layout pass.
      * <p>
      * Make sure you call {@link #onLayoutComplete()} at the end of your LayoutManager's
@@ -78,7 +93,7 @@ public abstract class OrientationHelper {
         return INVALID_SIZE == mLastTotalSpace ? 0 : getTotalSpace() - mLastTotalSpace;
     }
 
-    /**
+   /**
      * Returns the start of the view including its decoration and margin.
      * <p>
      * For example, for the horizontal helper, if a View's left is at pixel 20, has 2px left
@@ -90,7 +105,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getDecoratedStart(View view);
 
-    /**
+   /**
      * Returns the end of the view including its decoration and margin.
      * <p>
      * For example, for the horizontal helper, if a View's right is at pixel 200, has 2px right
@@ -102,7 +117,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getDecoratedEnd(View view);
 
-    /**
+   /**
      * Returns the end of the View after its matrix transformations are applied to its layout
      * position.
      * <p>
@@ -118,7 +133,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getTransformedEndWithDecoration(View view);
 
-    /**
+   /**
      * Returns the start of the View after its matrix transformations are applied to its layout
      * position.
      * <p>
@@ -134,7 +149,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getTransformedStartWithDecoration(View view);
 
-    /**
+   /**
      * Returns the space occupied by this View in the current orientation including decorations and
      * margins.
      *
@@ -144,7 +159,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getDecoratedMeasurement(View view);
 
-    /**
+   /**
      * Returns the space occupied by this View in the perpendicular orientation including
      * decorations and margins.
      *
@@ -154,35 +169,35 @@ public abstract class OrientationHelper {
      */
     public abstract int getDecoratedMeasurementInOther(View view);
 
-    /**
+   /**
      * Returns the start position of the layout after the start padding is added.
      *
      * @return The very first pixel we can draw.
      */
     public abstract int getStartAfterPadding();
 
-    /**
+   /**
      * Returns the end position of the layout after the end padding is removed.
      *
      * @return The end boundary for this layout.
      */
     public abstract int getEndAfterPadding();
 
-    /**
+   /**
      * Returns the end position of the layout without taking padding into account.
      *
      * @return The end boundary for this layout without considering padding.
      */
     public abstract int getEnd();
 
-    /**
+   /**
      * Offsets all children's positions by the given amount.
      *
      * @param amount Value to add to each child's layout parameters
      */
     public abstract void offsetChildren(int amount);
 
-    /**
+   /**
      * Returns the total space to layout. This number is the difference between
      * {@link #getEndAfterPadding()} and {@link #getStartAfterPadding()}.
      *
@@ -190,7 +205,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getTotalSpace();
 
-    /**
+   /**
      * Offsets the child in this orientation.
      *
      * @param view   View to offset
@@ -198,7 +213,7 @@ public abstract class OrientationHelper {
      */
     public abstract void offsetChild(View view, int offset);
 
-    /**
+   /**
      * Returns the padding at the end of the layout. For horizontal helper, this is the right
      * padding and for vertical helper, this is the bottom padding. This method does not check
      * whether the layout is RTL or not.
@@ -207,7 +222,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getEndPadding();
 
-    /**
+   /**
      * Returns the MeasureSpec mode for the current orientation from the LayoutManager.
      *
      * @return The current measure spec mode.
@@ -218,7 +233,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getMode();
 
-    /**
+   /**
      * Returns the MeasureSpec mode for the perpendicular orientation from the LayoutManager.
      *
      * @return The current measure spec mode.
@@ -229,7 +244,7 @@ public abstract class OrientationHelper {
      */
     public abstract int getModeInOther();
 
-    /**
+   /**
      * Creates an OrientationHelper for the given LayoutManager and orientation.
      *
      * @param layoutManager LayoutManager to attach to
@@ -247,7 +262,7 @@ public abstract class OrientationHelper {
         throw new IllegalArgumentException("invalid orientation");
     }
 
-    /**
+   /**
      * Creates a horizontal OrientationHelper for the given LayoutManager.
      *
      * @param layoutManager The LayoutManager to attach to.
@@ -346,7 +361,7 @@ public abstract class OrientationHelper {
         };
     }
 
-    /**
+   /**
      * Creates a vertical OrientationHelper for the given LayoutManager.
      *
      * @param layoutManager The LayoutManager to attach to.

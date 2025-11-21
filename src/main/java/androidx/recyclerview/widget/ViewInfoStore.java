@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 /*
  * Copyright 2018 The Android Open Source Project
  *
@@ -37,7 +52,7 @@ class ViewInfoStore {
 
     private static final boolean DEBUG = false;
 
-    /**
+   /**
      * View data records for pre-layout
      */
     @VisibleForTesting
@@ -47,7 +62,7 @@ class ViewInfoStore {
     @VisibleForTesting
     final LongSparseArray<RecyclerView.ViewHolder> mOldChangedHolders = new LongSparseArray<>();
 
-    /**
+   /**
      * Clears the state and all existing tracking data
      */
     void clear() {
@@ -55,7 +70,7 @@ class ViewInfoStore {
         mOldChangedHolders.clear();
     }
 
-    /**
+   /**
      * Adds the item information to the prelayout tracking
      * @param holder The ViewHolder whose information is being saved
      * @param info The information to save
@@ -75,7 +90,7 @@ class ViewInfoStore {
         return record != null && ((record.flags & FLAG_DISAPPEARED) != 0);
     }
 
-    /**
+   /**
      * Finds the ItemHolderInfo for the given ViewHolder in preLayout list and removes it.
      *
      * @param vh The ViewHolder whose information is being queried
@@ -86,7 +101,7 @@ class ViewInfoStore {
         return popFromLayoutStep(vh, FLAG_PRE);
     }
 
-    /**
+   /**
      * Finds the ItemHolderInfo for the given ViewHolder in postLayout list and removes it.
      *
      * @param vh The ViewHolder whose information is being queried
@@ -123,7 +138,7 @@ class ViewInfoStore {
         return null;
     }
 
-    /**
+   /**
      * Adds the given ViewHolder to the oldChangeHolders list
      * @param key The key to identify the ViewHolder.
      * @param holder The ViewHolder to store
@@ -132,7 +147,7 @@ class ViewInfoStore {
         mOldChangedHolders.put(key, holder);
     }
 
-    /**
+   /**
      * Adds the given ViewHolder to the appeared in pre layout list. These are Views added by the
      * LayoutManager during a pre-layout pass. We distinguish them from other views that were
      * already in the pre-layout so that ItemAnimator can choose to run a different animation for
@@ -151,7 +166,7 @@ class ViewInfoStore {
         record.preInfo = info;
     }
 
-    /**
+   /**
      * Checks whether the given ViewHolder is in preLayout list
      * @param viewHolder The ViewHolder to query
      *
@@ -162,7 +177,7 @@ class ViewInfoStore {
         return record != null && (record.flags & FLAG_PRE) != 0;
     }
 
-    /**
+   /**
      * Queries the oldChangeHolder list for the given key. If they are not tracked, simply returns
      * null.
      * @param key The key to be used to find the ViewHolder.
@@ -173,7 +188,7 @@ class ViewInfoStore {
         return mOldChangedHolders.get(key);
     }
 
-    /**
+   /**
      * Adds the item information to the post layout list
      * @param holder The ViewHolder whose information is being saved
      * @param info The information to save
@@ -188,7 +203,7 @@ class ViewInfoStore {
         record.flags |= FLAG_POST;
     }
 
-    /**
+   /**
      * A ViewHolder might be added by the LayoutManager just to animate its disappearance.
      * This list holds such items so that we can animate / recycle these ViewHolders properly.
      *
@@ -203,7 +218,7 @@ class ViewInfoStore {
         record.flags |= FLAG_DISAPPEARED;
     }
 
-    /**
+   /**
      * Removes a ViewHolder from disappearing list.
      * @param holder The ViewHolder to be removed from the disappearing list.
      */
@@ -252,7 +267,7 @@ class ViewInfoStore {
         }
     }
 
-    /**
+   /**
      * Removes the ViewHolder from all list
      * @param holder The ViewHolder which we should stop tracking
      */

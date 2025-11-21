@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.xwray.groupie;
 
 import r.android.annotation.CallSuper;
@@ -32,7 +47,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
         return (VH) new GroupieViewHolder(itemView);
     }
 
-    /**
+   /**
      * Perform any actions required to set up the view for display.
      *
      * @param viewHolder          The viewHolder to bind
@@ -51,7 +66,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
 
     public abstract void bind(@NonNull VH viewHolder, int position);
 
-    /**
+   /**
      * If you don't specify how to handle payloads in your implementation, they'll be ignored and
      * the adapter will do a full rebind.
      *
@@ -63,7 +78,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
         bind(viewHolder, position);
     }
 
-    /**
+   /**
      * Do any cleanup required for the viewholder to be reused.
      *
      * @param viewHolder The ViewHolder being recycled
@@ -73,7 +88,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
         viewHolder.unbind();
     }
 
-    /**
+   /**
      * Whether the view should be recycled. Return false to prevent the view from being recycled.
      * (Note that it may still be re-bound.)
      *
@@ -104,7 +119,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
 
     public void onViewDetachedFromWindow(@NonNull VH viewHolder) {}
 
-    /**
+   /**
      * Override this method if the same layout needs to have different viewTypes.
      * @return the viewType, defaults to the layoutId
      * @see RecyclerView.Adapter#getItemViewType(int)
@@ -164,7 +179,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
         }
     }
 
-    /**
+   /**
      * A set of key/value pairs stored on the ViewHolder that can be useful for distinguishing
      * items of the same view type.
      *
@@ -174,7 +189,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
         return extras;
     }
 
-    /**
+   /**
      * If you don't specify an id, this id is an auto-generated unique negative integer for each Item (the less
      * likely to conflict with your model IDs.)
      * <p>
@@ -187,7 +202,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
         return id;
     }
 
-    /**
+   /**
      * Whether two item objects represent the same underlying data when compared using DiffUtil,
      * even if there has been a change in that data.
      * <p>
@@ -202,7 +217,7 @@ public abstract class Item<VH extends GroupieViewHolder> implements RVGroup, Spa
         return getId() == other.getId();
     }
 
-    /**
+   /**
      * Whether this item has the same content as another when compared using DiffUtil.
      *
      * After two items have been determined to be the same using {@link #isSameAs(Item)} this function
